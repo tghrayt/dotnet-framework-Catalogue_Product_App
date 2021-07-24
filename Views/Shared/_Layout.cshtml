@@ -17,10 +17,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
+                        <a href="~/Home/Index" class="navbar-brand">
+                            <span class="glyphicon glyphicon-home"></span> Tghrayt App
+                        </a>
+                   
+                    @*@Html.ActionLink("Tghrayt App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="~/Catalogue/AjoutCatalogue">
+                            <span class="glyphicon glyphicon-plus"></span> Ajouter Catalogue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Produit/AjoutProduit">
+                            <span class="glyphicon glyphicon-plus"></span> Ajouter Produit
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

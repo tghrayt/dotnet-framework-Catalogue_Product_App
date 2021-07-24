@@ -76,3 +76,8 @@ C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.csproj.CopyComplete
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.dll
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.pdb
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\EntityFramework.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\EntityFramework.SqlServer.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\EntityFramework.xml
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\EntityFramework.SqlServer.xml
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\fr\EntityFramework.resources.dll

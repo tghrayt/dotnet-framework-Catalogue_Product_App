@@ -12,6 +12,7 @@ namespace Catalogue_Produit_App.Controllers
        
     {
         CatalogueProduitEntities db = new CatalogueProduitEntities();
+
         // GET: Catalogue
         public ActionResult Index()
         {

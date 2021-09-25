@@ -1,4 +1,5 @@
 ﻿@model Catalogue_Produit_App.Models.CAT_CATEGORIE
+ 
 @{
     ViewBag.Title = "AjoutCatalogue";
     //Layout = "~/Views/Shared/_Layout.cshtml";
@@ -43,10 +44,10 @@
         @foreach (var data in ViewBag.listeCategorie)
         {
             <tr>
-                <td>@data.LIBELLE_CATEGORIE</td>
-                <td>@data.DATE_SAISIE</td>
-                <td><a href="~/Catalogue/ModifierCatalogue/@data.CODE_CATEGORIE" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Modifier</a></td>
-                <td><a href="~/Catalogue/SupprimerCatalogue/@data.CODE_CATEGORIE" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a></td>
+                <td>@data.libelleCategorie</td>
+                <td>@data.dateSaisie</td>
+                <td><a href="~/Catalogue/ModifierCatalogue/@data.codeCategorie" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Modifier</a></td>
+                <td><a href="~/Catalogue/SupprimerCatalogue/@data.codeCategorie" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a></td>
             </tr>
         }
     </table>

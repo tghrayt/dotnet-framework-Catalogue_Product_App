@@ -5,13 +5,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Catalogue_Produit_App.Models;
+using Catalogue_Produit_App.Service;
 
 namespace Catalogue_Produit_App.Controllers
 {
     public class CatalogueController : Controller
-       
+
     {
+        public CatalogueController()
+        {
+
+        }
         CatalogueProduitEntities db = new CatalogueProduitEntities();
+        private readonly ICategorieService _categorieService;
+        public CatalogueController(ICategorieService categorieService) => _categorieService = categorieService;
+
 
         // GET: Catalogue
         public ActionResult Index()
@@ -19,17 +27,21 @@ namespace Catalogue_Produit_App.Controllers
             return View();
         }
 
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult AjoutCatalogue()
         {
-            try
-            {
-                ViewBag.listeCategorie = db.CAT_CATEGORIE.ToList();
+            //try
+            //{
+                ViewBag.listeCategorie = _categorieService.GetAllCategories();
                 return View();
-            }
-            catch (Exception e)
-            {
-                return HttpNotFound();
-            }
+            //}
+            //catch (Exception e)
+            //{
+
+            //    return HttpNotFound();
+            //}
         }
 
         [HttpPost]
@@ -96,7 +108,7 @@ namespace Catalogue_Produit_App.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    
+
                     db.Entry(categorie).State = EntityState.Modified; // modification de notre categorie
                     db.SaveChanges();
                 }

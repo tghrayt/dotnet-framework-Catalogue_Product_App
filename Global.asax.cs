@@ -13,6 +13,7 @@ namespace Catalogue_Produit_App
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            UnityConfig.RegisterComponents();
         }
     }
 }

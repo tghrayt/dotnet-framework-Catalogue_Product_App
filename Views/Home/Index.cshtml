@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home";
 }
 
 <br />
@@ -17,7 +17,7 @@
     <div class="alert alert-info">
         <strong>@data.LIBELLE_CATEGORIE :</strong>  Découvrez tous les produits de  la gamme @data.LIBELLE_CATEGORIE disponibles immédiatement.
     </div>
-    <br />
+    <br />  
     @foreach (var produit in data.CAT_PRODUIT)
     {
         <div class="col-sm-4">

@@ -71,7 +71,6 @@ C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\fr\System.Web.Webpages.D
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\fr\System.Web.Webpages.Razor.resources.dll
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\fr\System.Web.Helpers.resources.dll
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\fr\System.Web.Mvc.resources.dll
-C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.csprojAssemblyReference.cache
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.csproj.CoreCompileInputs.cache
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.csproj.CopyComplete
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.dll
@@ -81,3 +80,13 @@ C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\EntityFramework.SqlServe
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\EntityFramework.xml
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\EntityFramework.SqlServer.xml
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\fr\EntityFramework.resources.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\Unity.Abstractions.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\Unity.Container.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\Unity.Mvc5.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\Unity.Abstractions.pdb
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\Unity.Container.pdb
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\fr\EntityFramework.SqlServer.resources.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.csproj.AssemblyReference.cache

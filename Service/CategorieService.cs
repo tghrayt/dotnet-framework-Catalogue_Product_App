@@ -1,5 +1,6 @@
 ﻿using Catalogue_Produit_App.DAO;
 using Catalogue_Produit_App.DTO;
+using Catalogue_Produit_App.Helper;
 using Catalogue_Produit_App.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Catalogue_Produit_App.Service
     public class CategorieService : ICategorieService
 
     {
+        CategorieHelper _categorieHelper = new CategorieHelper();
 
 
         public CategorieService()
@@ -39,8 +41,12 @@ namespace Catalogue_Produit_App.Service
                 List<CategorieDto> listCategorieDto = new List<CategorieDto>();         
                 List<CAT_CATEGORIE> listCategories = new List<CAT_CATEGORIE>();
                 listCategories = _categorieRepository.GetAllCategories();
+                if (_categorieHelper.IsEmpty(listCategories))
+                {
+                    throw new Exception("il n'y a pas de catalogue sur la base de données !");
+                }
 
-                foreach(CAT_CATEGORIE item in listCategories)
+            foreach (CAT_CATEGORIE item in listCategories)
                 {
                     CategorieDto categorieDto = new CategorieDto();
                     categorieDto.codeCategorie = item.CODE_CATEGORIE;

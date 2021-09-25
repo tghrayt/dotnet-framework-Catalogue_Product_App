@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Catalogue_Produit_App.Models;
 using Catalogue_Produit_App.Service;
@@ -32,16 +30,16 @@ namespace Catalogue_Produit_App.Controllers
         [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult AjoutCatalogue()
         {
-            //try
-            //{
+            try
+            {
                 ViewBag.listeCategorie = _categorieService.GetAllCategories();
                 return View();
-            //}
-            //catch (Exception e)
-            //{
+            }
+            catch (Exception e)
+            {
 
-            //    return HttpNotFound();
-            //}
+                return View("Error");
+            }
         }
 
         [HttpPost]

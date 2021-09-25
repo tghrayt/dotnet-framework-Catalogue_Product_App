@@ -12,7 +12,7 @@ namespace Catalogue_Produit_App.DAO
         //Injecter le repository par défaut entity framework (dbContext)
         CatalogueProduitEntities _db = new CatalogueProduitEntities();
 
-        CategorieHelper _categorieHelper = new CategorieHelper();
+        
 
         public bool AddNewCategorie(CAT_CATEGORIE categorie)
         {
@@ -26,25 +26,9 @@ namespace Catalogue_Produit_App.DAO
 
         public List<CAT_CATEGORIE> GetAllCategories()
         {
-            List<CAT_CATEGORIE> listCategories = new List<CAT_CATEGORIE>();
-
-            try
-            {            
-                listCategories = _db.CAT_CATEGORIE.ToList();
-                if (_categorieHelper.IsEmpty(listCategories))
-                {
-                    throw new Exception("il n'y a pas de catalogue sur la base de données !");
-                }
-                return listCategories;
-
-            }
-            catch (Exception e)
-            {   
-                throw new Exception(e.Message);
-               
-            }
-
-            
+            List<CAT_CATEGORIE> listCategories = new List<CAT_CATEGORIE>();                  
+                listCategories = _db.CAT_CATEGORIE.ToList();               
+                return listCategories;            
         }
 
         public CAT_CATEGORIE GetGategorieById(int codeCategorie)

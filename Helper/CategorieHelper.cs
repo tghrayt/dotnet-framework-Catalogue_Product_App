@@ -1,8 +1,6 @@
 ﻿using Catalogue_Produit_App.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
 
 namespace Catalogue_Produit_App.Helper
 {

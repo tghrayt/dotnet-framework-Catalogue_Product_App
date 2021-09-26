@@ -10,6 +10,7 @@ namespace Catalogue_Produit_App
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             UnityConfig.RegisterComponents();
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }

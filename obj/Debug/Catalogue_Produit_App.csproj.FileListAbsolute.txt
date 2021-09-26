@@ -90,3 +90,5 @@ C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\Unity.Abstractions.pdb
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\Unity.Container.pdb
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\fr\EntityFramework.SqlServer.resources.dll
 C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\obj\Debug\Catalogue_Produit_App.csproj.AssemblyReference.cache
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\log4net.dll
+C:\Users\Tghrayt\source\repos\Catalogue_Produit_App\bin\log4net.xml

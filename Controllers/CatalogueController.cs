@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Catalogue_Produit_App.Helper;
 using Catalogue_Produit_App.Models;
 using Catalogue_Produit_App.Service;
 
@@ -10,6 +11,7 @@ namespace Catalogue_Produit_App.Controllers
     public class CatalogueController : Controller
 
     {
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net 
         public CatalogueController()
         {
 
@@ -26,18 +28,21 @@ namespace Catalogue_Produit_App.Controllers
         }
 
 
+        
         [HandleError]
         [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult AjoutCatalogue()
         {
             try
             {
+                //This is for example , we need to remove this code later  
+                Log.Info("Category Page started...");
                 ViewBag.listeCategorie = _categorieService.GetAllCategories();
                 return View();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                logger.Error(ex.ToString());
                 return View("Error");
             }
         }

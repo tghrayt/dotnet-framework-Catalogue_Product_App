@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Catalogue_Produit_App.DTO;
 using Catalogue_Produit_App.Helper;
 using Catalogue_Produit_App.Models;
 using Catalogue_Produit_App.Service;
@@ -20,11 +21,22 @@ namespace Catalogue_Produit_App.Controllers
         private readonly ICategorieService _categorieService;
         public CatalogueController(ICategorieService categorieService) => _categorieService = categorieService;
 
+        private CategorieHelper _categorieHelper = new CategorieHelper();
 
         // GET: Catalogue
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                LogHelper.Info("Category Page started...");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return View("Error");
+            }
+            
         }
 
 
@@ -34,9 +46,8 @@ namespace Catalogue_Produit_App.Controllers
         public ActionResult AjoutCatalogue()
         {
             try
-            {
-                //This is for example , we need to remove this code later  
-                Log.Info("Category Page started...");
+            {  
+                LogHelper.Info("Category Page started...");
                 ViewBag.listeCategorie = _categorieService.GetAllCategories();
                 return View();
             }
@@ -50,20 +61,34 @@ namespace Catalogue_Produit_App.Controllers
         [HttpPost]
         public ActionResult AjoutCatalogue(CAT_CATEGORIE categorie)//enregistrement
         {
+            bool varAdd = false;
+            CategorieDto categorieDto = new CategorieDto();
             try
             {
 
                 if (ModelState.IsValid)
                 {
                     categorie.DATE_SAISIE = DateTime.Now;
-                    db.CAT_CATEGORIE.Add(categorie);
-                    db.SaveChanges();
+                    categorieDto = _categorieHelper.ConvertToDTO(categorie);
+                    varAdd = _categorieService.AddNewCategorie(categorieDto);
+                    LogHelper.Info("$Insertion de la categorie ..."+categorie.LIBELLE_CATEGORIE+" est encours ...! ");
                 }
-                return RedirectToAction("AjoutCatalogue");
+               
+                LogHelper.Info("$Insertion de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ");
+                if(varAdd == true)
+                {
+                    return RedirectToAction("AjoutCatalogue");
+                }
+                else
+                {
+                    throw new Exception("Impossible d'ajoiter cette catégorie ..!");
+                }
+               
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }
 
@@ -74,14 +99,17 @@ namespace Catalogue_Produit_App.Controllers
                 CAT_CATEGORIE categorie = db.CAT_CATEGORIE.Find(id); //recherchede la categorie
                 if (categorie != null)
                 {
+                    LogHelper.Info("$Suppression de la categorie ..." + categorie.LIBELLE_CATEGORIE + " est encours ...! ");
                     db.CAT_CATEGORIE.Remove(categorie); //supprimer la categorie
                     db.SaveChanges();//enregistrer le resultat
                 }
+                LogHelper.Info("$Suppresion de la categorie ..."+categorie.LIBELLE_CATEGORIE+" avec succès ...! ");
                 return RedirectToAction("AjoutCatalogue");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }
 
@@ -93,13 +121,16 @@ namespace Catalogue_Produit_App.Controllers
                 CAT_CATEGORIE categorie = db.CAT_CATEGORIE.Find(id);
                 if (categorie != null)
                 {
+                    LogHelper.Info("$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " est encours ...! ");
                     return View("AjoutCatalogue", categorie);
                 }
+                LogHelper.Info("$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ");
                 return RedirectToAction("AjoutCatalogue");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }
 
@@ -111,15 +142,17 @@ namespace Catalogue_Produit_App.Controllers
 
                 if (ModelState.IsValid)
                 {
-
+                    LogHelper.Info("$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " est encours ...! ");
                     db.Entry(categorie).State = EntityState.Modified; // modification de notre categorie
                     db.SaveChanges();
                 }
+                LogHelper.Info("$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ");
                 return RedirectToAction("AjoutCatalogue");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }
 

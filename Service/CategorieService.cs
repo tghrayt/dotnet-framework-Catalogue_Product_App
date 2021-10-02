@@ -25,9 +25,16 @@ namespace Catalogue_Produit_App.Service
             _categorieRepository = categorieRepository;
         }
 
-        public void AddNewCategorie(CategorieDto categorie)
+        public bool AddNewCategorie(CategorieDto categorie)
         {
-            throw new NotImplementedException();
+            CAT_CATEGORIE categorie_transfered = new CAT_CATEGORIE();
+            if (categorie != null)
+            {
+                categorie_transfered = _categorieHelper.ConvertFromDto(categorie);
+                _categorieRepository.AddNewCategorie(categorie_transfered);
+                return true;
+            }
+            return false;
         }
 
         public void DeleteCategorie(int codeCategorie)

@@ -11,7 +11,7 @@ namespace Catalogue_Produit_App.Service
     {
         List<CategorieDto> GetAllCategories();
         CategorieDto GetGategorieById(int codeCategorie);
-        void AddNewCategorie(CategorieDto categorie);
+        bool AddNewCategorie(CategorieDto categorie);
         void DeleteCategorie(int codeCategorie);
         CategorieDto UpdateCategorie(int codeCategorie, CategorieDto categorie);
     }

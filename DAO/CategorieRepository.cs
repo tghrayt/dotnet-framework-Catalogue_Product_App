@@ -11,12 +11,19 @@ namespace Catalogue_Produit_App.DAO
     {
         //Injecter le repository par défaut entity framework (dbContext)
         CatalogueProduitEntities _db = new CatalogueProduitEntities();
-
+        CategorieHelper categorieHelper = new CategorieHelper();
         
 
         public bool AddNewCategorie(CAT_CATEGORIE categorie)
         {
-            throw new NotImplementedException();
+            if(categorie != null)
+            {
+                _db.CAT_CATEGORIE.Add(categorie);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+            
         }
 
         public void DeleteCategorie(int codeCategorie)

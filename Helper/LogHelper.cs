@@ -6,14 +6,14 @@ using System.Web;
 
 namespace Catalogue_Produit_App.Helper
 {
-    public class Log
+    public class LogHelper
     {
 
-        private static readonly Log _instance = new Log();
+        private static readonly LogHelper _instance = new LogHelper();
         protected ILog monitoringLogger;
         protected static ILog debugLogger;
 
-        private Log()
+        private LogHelper()
         {
             monitoringLogger = LogManager.GetLogger("MonitoringLogger");
             debugLogger = LogManager.GetLogger("DebugLogger");

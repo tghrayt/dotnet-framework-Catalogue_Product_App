@@ -39,7 +39,10 @@ namespace Catalogue_Produit_App.Service
 
         public void DeleteCategorie(int codeCategorie)
         {
-            throw new NotImplementedException();
+            if(codeCategorie!= 0)
+            {
+                _categorieRepository.DeleteCategorie(codeCategorie);
+            }
         }
 
         public List<CategorieDto> GetAllCategories()

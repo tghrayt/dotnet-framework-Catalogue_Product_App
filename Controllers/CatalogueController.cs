@@ -23,6 +23,9 @@ namespace Catalogue_Produit_App.Controllers
 
         private CategorieHelper _categorieHelper = new CategorieHelper();
 
+
+
+
         // GET: Catalogue
         public ActionResult Index()
         {
@@ -72,6 +75,7 @@ namespace Catalogue_Produit_App.Controllers
                     categorieDto = _categorieHelper.ConvertToDTO(categorie);
                     varAdd = _categorieService.AddNewCategorie(categorieDto);
                     LogHelper.Info("$Insertion de la categorie ..."+categorie.LIBELLE_CATEGORIE+" est encours ...! ");
+                    ViewBag.SuccessMessage = "Insertion de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ";
                 }
                
                 LogHelper.Info("$Insertion de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ");
@@ -81,7 +85,8 @@ namespace Catalogue_Produit_App.Controllers
                 }
                 else
                 {
-                    throw new Exception("Impossible d'ajoiter cette catégorie ..!");
+                    ViewBag.ErrorMessage = "Impossible d'ajouter cette catégorie ..!";
+                    throw new Exception("Impossible d'ajouter cette catégorie ..!");
                 }
                
             }
@@ -100,14 +105,15 @@ namespace Catalogue_Produit_App.Controllers
                 if (categorie != null)
                 {
                     LogHelper.Info("$Suppression de la categorie ..." + categorie.LIBELLE_CATEGORIE + " est encours ...! ");
-                    db.CAT_CATEGORIE.Remove(categorie); //supprimer la categorie
-                    db.SaveChanges();//enregistrer le resultat
+                    _categorieService.DeleteCategorie(id);
+                    ViewBag.SuccessMessage = "Suppresion de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ";
                 }
                 LogHelper.Info("$Suppresion de la categorie ..."+categorie.LIBELLE_CATEGORIE+" avec succès ...! ");
                 return RedirectToAction("AjoutCatalogue");
             }
             catch (Exception ex)
             {
+                ViewBag.ErrorMessage = "Impossible de supprimer cette catégorie ..!";
                 logger.Error(ex.ToString());
                 return View("Error");
             }

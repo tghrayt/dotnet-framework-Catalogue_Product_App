@@ -28,7 +28,10 @@ namespace Catalogue_Produit_App.DAO
 
         public void DeleteCategorie(int codeCategorie)
         {
-            throw new NotImplementedException();
+            CAT_CATEGORIE categorie = new CAT_CATEGORIE();
+            categorie = GetGategorieById(codeCategorie);
+            _db.CAT_CATEGORIE.Remove(categorie);
+            _db.SaveChanges();
         }
 
         public List<CAT_CATEGORIE> GetAllCategories()
@@ -39,8 +42,11 @@ namespace Catalogue_Produit_App.DAO
         }
 
         public CAT_CATEGORIE GetGategorieById(int codeCategorie)
+
         {
-            throw new NotImplementedException();
+            CAT_CATEGORIE categorie = new CAT_CATEGORIE();
+            categorie = _db.CAT_CATEGORIE.Find(codeCategorie);
+            return categorie;
         }
 
         public CAT_CATEGORIE UpdateCategorie(int codeCategorie, CAT_CATEGORIE categorie)

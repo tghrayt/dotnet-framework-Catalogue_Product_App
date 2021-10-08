@@ -28,6 +28,7 @@ namespace Catalogue_Produit_App.Helper
             CategorieDto categorieDto = new CategorieDto();
             categorieDto.dateSaisie = (System.DateTime)categorie.DATE_SAISIE;
             categorieDto.libelleCategorie = categorie.LIBELLE_CATEGORIE;
+            categorieDto.codeCategorie = categorie.CODE_CATEGORIE;
 
 
             return categorieDto;

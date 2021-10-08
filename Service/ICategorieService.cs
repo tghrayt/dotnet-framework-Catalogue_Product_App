@@ -13,6 +13,6 @@ namespace Catalogue_Produit_App.Service
         CategorieDto GetGategorieById(int codeCategorie);
         bool AddNewCategorie(CategorieDto categorie);
         void DeleteCategorie(int codeCategorie);
-        CategorieDto UpdateCategorie(int codeCategorie, CategorieDto categorie);
+        CategorieDto UpdateCategorie(CategorieDto categorie);
     }
 }

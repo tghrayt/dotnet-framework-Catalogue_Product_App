@@ -123,11 +123,14 @@ namespace Catalogue_Produit_App.Controllers
         {
             try
             {
-                ViewBag.listeCategorie = db.CAT_CATEGORIE.ToList();
-                CAT_CATEGORIE categorie = db.CAT_CATEGORIE.Find(id);
+                ViewBag.listeCategorie = _categorieService.GetAllCategories();
+                CAT_CATEGORIE categorie = new CAT_CATEGORIE();
+                CategorieDto categorieDto = _categorieService.GetGategorieById(id);
+                categorie = _categorieHelper.ConvertFromDto(categorieDto);
                 if (categorie != null)
                 {
                     LogHelper.Info("$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " est encours ...! ");
+                    ViewBag.SuccessMessage = "$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ";
                     return View("AjoutCatalogue", categorie);
                 }
                 LogHelper.Info("$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ");
@@ -135,6 +138,7 @@ namespace Catalogue_Produit_App.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.ErrorMessage = "Impossible de modifier cette catégorie ..!";
                 logger.Error(ex.ToString());
                 return View("Error");
             }
@@ -149,14 +153,19 @@ namespace Catalogue_Produit_App.Controllers
                 if (ModelState.IsValid)
                 {
                     LogHelper.Info("$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " est encours ...! ");
-                    db.Entry(categorie).State = EntityState.Modified; // modification de notre categorie
-                    db.SaveChanges();
+                    //db.Entry(categorie).State = EntityState.Modified; // modification de notre categorie
+                    //db.SaveChanges();
+                    CategorieDto categorieDto = new CategorieDto();
+                    categorieDto = _categorieHelper.ConvertToDTO(categorie);
+                    _categorieService.UpdateCategorie(categorieDto);
+                    ViewBag.SuccessMessage = "$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ";
                 }
                 LogHelper.Info("$Modification de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ");
                 return RedirectToAction("AjoutCatalogue");
             }
             catch (Exception ex)
             {
+                ViewBag.ErrorMessage = "Impossible de modifier cette catégorie ..!";
                 logger.Error(ex.ToString());
                 return View("Error");
             }

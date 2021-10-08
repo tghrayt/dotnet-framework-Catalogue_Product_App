@@ -14,7 +14,7 @@ namespace Catalogue_Produit_App.DAO
         CAT_CATEGORIE GetGategorieById(int codeCategorie);
         bool AddNewCategorie(CAT_CATEGORIE categorie);
         void DeleteCategorie(int codeCategorie);
-        CAT_CATEGORIE UpdateCategorie(int codeCategorie, CAT_CATEGORIE categorie);
+        CAT_CATEGORIE UpdateCategorie(CAT_CATEGORIE categorie);
 
     }
 }

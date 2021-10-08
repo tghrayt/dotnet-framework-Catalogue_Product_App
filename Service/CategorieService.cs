@@ -72,12 +72,18 @@ namespace Catalogue_Produit_App.Service
 
         public CategorieDto GetGategorieById(int codeCategorie)
         {
-            throw new NotImplementedException();
+            CategorieDto categorieDto = new CategorieDto();
+            categorieDto = _categorieHelper.ConvertToDTO(_categorieRepository.GetGategorieById(codeCategorie));
+            return categorieDto;
         }
 
-        public CategorieDto UpdateCategorie(int codeCategorie, CategorieDto categorie)
+        public CategorieDto UpdateCategorie(CategorieDto categorie)
         {
-            throw new NotImplementedException();
+            CategorieDto categorieDto = new CategorieDto();
+            CAT_CATEGORIE categorieData = new CAT_CATEGORIE();
+            categorieData = _categorieHelper.ConvertFromDto(categorie);
+            categorieDto = _categorieHelper.ConvertToDTO(_categorieRepository.UpdateCategorie(categorieData));
+            return categorieDto;
         }
     }
 }

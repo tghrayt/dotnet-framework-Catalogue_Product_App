@@ -3,6 +3,7 @@ using Catalogue_Produit_App.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 
 namespace Catalogue_Produit_App.DAO
@@ -12,18 +13,18 @@ namespace Catalogue_Produit_App.DAO
         //Injecter le repository par défaut entity framework (dbContext)
         CatalogueProduitEntities _db = new CatalogueProduitEntities();
         CategorieHelper categorieHelper = new CategorieHelper();
-        
+
 
         public bool AddNewCategorie(CAT_CATEGORIE categorie)
         {
-            if(categorie != null)
+            if (categorie != null)
             {
                 _db.CAT_CATEGORIE.Add(categorie);
                 _db.SaveChanges();
                 return true;
             }
             return false;
-            
+
         }
 
         public void DeleteCategorie(int codeCategorie)
@@ -36,9 +37,9 @@ namespace Catalogue_Produit_App.DAO
 
         public List<CAT_CATEGORIE> GetAllCategories()
         {
-            List<CAT_CATEGORIE> listCategories = new List<CAT_CATEGORIE>();                  
-                listCategories = _db.CAT_CATEGORIE.ToList();               
-                return listCategories;            
+            List<CAT_CATEGORIE> listCategories = new List<CAT_CATEGORIE>();
+            listCategories = _db.CAT_CATEGORIE.ToList();
+            return listCategories;
         }
 
         public CAT_CATEGORIE GetGategorieById(int codeCategorie)
@@ -49,9 +50,11 @@ namespace Catalogue_Produit_App.DAO
             return categorie;
         }
 
-        public CAT_CATEGORIE UpdateCategorie(int codeCategorie, CAT_CATEGORIE categorie)
+        public CAT_CATEGORIE UpdateCategorie(CAT_CATEGORIE categorie)
         {
-            throw new NotImplementedException();
+            _db.Entry(categorie).State = EntityState.Modified;
+            _db.SaveChanges();
+            return categorie;
         }
     }
 }

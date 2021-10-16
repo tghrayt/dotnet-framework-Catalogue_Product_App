@@ -61,6 +61,10 @@ namespace Catalogue_Produit_App.Controllers
             }
         }
 
+
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         [HttpPost]
         public ActionResult AjoutCatalogue(CAT_CATEGORIE categorie)//enregistrement
         {
@@ -97,6 +101,9 @@ namespace Catalogue_Produit_App.Controllers
             }
         }
 
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult SupprimerCatalogue(int id)
         {
             try
@@ -119,6 +126,10 @@ namespace Catalogue_Produit_App.Controllers
             }
         }
 
+
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult ModifierCatalogue(int id)
         {
             try
@@ -144,6 +155,9 @@ namespace Catalogue_Produit_App.Controllers
             }
         }
 
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         [HttpPost]
         public ActionResult ModifierCatalogue(CAT_CATEGORIE categorie)
         {

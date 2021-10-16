@@ -10,6 +10,7 @@ namespace Catalogue_Produit_App.DTO
 
         public int codeProduit { get; set; }
         public CategorieDto categorieDto { get; set; }
+        public int codeCategorie { get; set; }
         public string libelleProduit { get; set; }
         public string descriptionProduit { get; set; }
         public string imageProduit { get; set; }

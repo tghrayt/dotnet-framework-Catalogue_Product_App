@@ -14,6 +14,9 @@ namespace Catalogue_Produit_App
             container.RegisterType<ICategorieRepository, CategorieRepository>();
             container.RegisterType<ICategorieService, CategorieService>();
 
+            container.RegisterType<IProduitRepository, ProduitRepository>();
+            container.RegisterType<IProduitService, ProduitService>();
+
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 

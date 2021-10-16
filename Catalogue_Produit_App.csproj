@@ -151,6 +151,8 @@
     <Compile Include="Controllers\ProduitController.cs" />
     <Compile Include="DAO\CategorieRepository.cs" />
     <Compile Include="DAO\ICategorieRepository.cs" />
+    <Compile Include="DAO\IProduitRepository.cs" />
+    <Compile Include="DAO\ProduitRepository.cs" />
     <Compile Include="DTO\CategorieDto.cs" />
     <Compile Include="DTO\ProduitDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -158,6 +160,7 @@
     </Compile>
     <Compile Include="Helper\CategorieHelper.cs" />
     <Compile Include="Helper\LogHelper.cs" />
+    <Compile Include="Helper\ProduitHelper.cs" />
     <Compile Include="Models\CatalogueProduitModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -182,6 +185,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CategorieService.cs" />
     <Compile Include="Service\ICategorieService.cs" />
+    <Compile Include="Service\IProduitService.cs" />
+    <Compile Include="Service\ProduitService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

@@ -6,36 +6,76 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Catalogue_Produit_App.Helper;
+using Catalogue_Produit_App.DTO;
+using Catalogue_Produit_App.Service;
 
 namespace Catalogue_Produit_App.Controllers
 {
     public class ProduitController : Controller
     {
-        CatalogueProduitEntities db = new CatalogueProduitEntities();
-        // GET: Produit
-        public ActionResult Index()
+
+        ProduitController()
         {
-            return View();
+
         }
 
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net 
 
+
+        private readonly IProduitService _produitService;
+        public ProduitController(IProduitService produitService) => _produitService = produitService;
+        CatalogueProduitEntities db = new CatalogueProduitEntities();
+        ProduitHelper _produitHelper = new ProduitHelper();
+        // GET: Produit
+
+
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
+        public ActionResult Index()
+        {
+
+            try
+            {
+                LogHelper.Info("Products Page started...");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.ToString());
+                return View("Error");
+            }
+
+        }
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult AjoutProduit()
         {
             try
             {
+                LogHelper.Info("Products Page started...");
                 ViewBag.listeProduit = db.CAT_PRODUIT.ToList();
                 ViewBag.listeCategorie = db.CAT_CATEGORIE.ToList();
                 return View();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }
 
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         [HttpPost]
         public ActionResult AjoutProduit(CAT_PRODUIT produit)
         {
+
+            bool varAdd = false;
+            ProduitDto produitDTO = new ProduitDto();
             try
             {
                 if (ModelState.IsValid)
@@ -54,14 +94,26 @@ namespace Catalogue_Produit_App.Controllers
                         }
                     }
                     produit.DATE_SAISIE = DateTime.Now;
-                    db.CAT_PRODUIT.Add(produit);
-                    db.SaveChanges();
+                    produitDTO = _produitHelper.ConvertToDTO(produit);
+                    varAdd = _produitService.AddNewProduit(produitDTO);
+                    LogHelper.Info("$Insertion de produit ..." + produit.LIBELLE_PRODUIT + " est encours ...! ");
+                    ViewBag.SuccessMessage = "Insertion de produit ..." + produit.LIBELLE_PRODUIT + " avec succès ...! ";
                 }
-                return RedirectToAction("AjoutProduit");
+                LogHelper.Info("$Insertion de produit ..." + produit.LIBELLE_PRODUIT + " avec succès ...! ");
+                if (varAdd == true)
+                {
+                    return RedirectToAction("AjoutProduit");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Impossible d'ajouter ce produit ..!";
+                    throw new Exception("Impossible d'ajouter ce produit ..!");
+                }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }
 

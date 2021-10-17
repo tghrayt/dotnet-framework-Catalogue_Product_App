@@ -26,7 +26,7 @@
                     <select id="CODE_CATEGORIE" name="CODE_CATEGORIE" class="form-control">
                         @foreach (var data in ViewBag.listeCategorie)
                         {
-                            <option value="@data.CODE_CATEGORIE" @(Model != null ? Model.CODE_CATEGORIE == @data.CODE_CATEGORIE ? "selected" : "" : "" )>@data.LIBELLE_CATEGORIE</option>
+                            <option value="@data.codeCategorie" @(Model != null ? Model.CODE_CATEGORIE == @data.codeCategorie ? "selected" : "" : "" )>@data.libelleCategorie</option>
                         }
                     </select>
                 </div>
@@ -77,13 +77,13 @@
             @foreach (var data in ViewBag.listeProduit)
             {
                 <tr>
-                    <td>@data.LIBELLE_PRODUIT</td>
-                    <td>@data.DESCRIPTION_PRODUIT</td>
-                    <td><img src="@data.URL_IMAGE_PRODUIT/@data.IMAGE_PRODUIT" width="100" height="80" /></td>
-                    <td>@data.CAT_CATEGORIE.LIBELLE_CATEGORIE</td>
-                    <td>@data.DATE_SAISIE</td>
-                    <td><a href="~/Produit/ModifierProduit/@data.CODE_PRODUIT" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Modifier</a></td>
-                    <td><a href="~/Produit/SupprimerProduit/@data.CODE_PRODUIT" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a></td>
+                    <td>@data.libelleProduit</td>
+                    <td>@data.descriptionProduit</td>
+                    <td><img src="@data.urlImageProduit/@data.imageProduit" width="100" height="80" /></td>
+                    <td>@data.categorieDto.libelleCategorie</td>
+                    <td>@data.DateSaisie</td>
+                    <td><a href="~/Produit/ModifierProduit/@data.codeProduit" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Modifier</a></td>
+                    <td><a href="~/Produit/SupprimerProduit/@data.codeProduit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Supprimer</a></td>
                 </tr>
             }
         </table>

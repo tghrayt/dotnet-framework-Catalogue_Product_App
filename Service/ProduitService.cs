@@ -14,6 +14,7 @@ namespace Catalogue_Produit_App.Service
 
 
         ProduitHelper _produitHelper = new ProduitHelper();
+        CategorieHelper _categorieHelper = new CategorieHelper();
         ProduitService()
         {
 
@@ -49,7 +50,30 @@ namespace Catalogue_Produit_App.Service
 
         public List<ProduitDto> GetAllProduits()
         {
-            throw new NotImplementedException();
+            List<ProduitDto> listeProduitDto = new List<ProduitDto>();
+            List<CAT_PRODUIT> listeProduit = new List<CAT_PRODUIT>();
+            listeProduit = _produitRepository.GetAllProduits();
+            if (_produitHelper.IsEmpty(listeProduit)){
+
+                throw new Exception("il n'y a pas de produits sur la base de données !");
+            }
+
+            foreach(CAT_PRODUIT item in listeProduit)
+            {
+                ProduitDto produitDTO = new ProduitDto();
+                produitDTO.codeProduit = item.CODE_PRODUIT;
+                produitDTO.codeCategorie = (int)item.CODE_CATEGORIE;
+                produitDTO.DateSaisie = (DateTime)item.DATE_SAISIE;
+                produitDTO.descriptionProduit = item.DESCRIPTION_PRODUIT;
+                produitDTO.imageProduit = item.IMAGE_PRODUIT;
+                produitDTO.libelleProduit = item.LIBELLE_PRODUIT;
+                produitDTO.urlImageProduit = item.URL_IMAGE_PRODUIT;
+                produitDTO.categorieDto = _categorieHelper.ConvertToDTO(item.CAT_CATEGORIE);
+                listeProduitDto.Add(produitDTO);
+            }
+
+            return listeProduitDto;
+
         }
 
         public ProduitDto GetProduitById(int codeProduit)

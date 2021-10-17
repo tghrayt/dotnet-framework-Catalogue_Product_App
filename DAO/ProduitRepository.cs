@@ -30,7 +30,7 @@ namespace Catalogue_Produit_App.DAO
 
         public List<CAT_PRODUIT> GetAllProduits()
         {
-            throw new NotImplementedException();
+            return _db.CAT_PRODUIT.ToList();
         }
 
         public CAT_PRODUIT GetProduitById(int codeProduit)

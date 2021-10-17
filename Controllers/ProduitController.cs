@@ -24,13 +24,21 @@ namespace Catalogue_Produit_App.Controllers
 
 
         private readonly IProduitService _produitService;
-        public ProduitController(IProduitService produitService) => _produitService = produitService;
+        private readonly ICategorieService _categorieService;
+        public ProduitController(IProduitService produitService , ICategorieService categorieService) {
+
+            _produitService = produitService;
+            _categorieService = categorieService;
+        }
         CatalogueProduitEntities db = new CatalogueProduitEntities();
         ProduitHelper _produitHelper = new ProduitHelper();
+
+
+
+
+
+
         // GET: Produit
-
-
-
         [HandleError]
         [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult Index()
@@ -56,8 +64,8 @@ namespace Catalogue_Produit_App.Controllers
             try
             {
                 LogHelper.Info("Products Page started...");
-                ViewBag.listeProduit = db.CAT_PRODUIT.ToList();
-                ViewBag.listeCategorie = db.CAT_CATEGORIE.ToList();
+                ViewBag.listeProduit = _produitService.GetAllProduits();
+                ViewBag.listeCategorie = _categorieService.GetAllCategories();
                 return View();
             }
             catch (Exception ex)

@@ -45,7 +45,10 @@ namespace Catalogue_Produit_App.Service
 
         public void DeleteProduit(int codeProduit)
         {
-            throw new NotImplementedException();
+           if(codeProduit != 0)
+            {
+                _produitRepository.DeleteProduit(codeProduit);
+            }
         }
 
         public List<ProduitDto> GetAllProduits()
@@ -78,12 +81,21 @@ namespace Catalogue_Produit_App.Service
 
         public ProduitDto GetProduitById(int codeProduit)
         {
-            throw new NotImplementedException();
+            ProduitDto produitDto = new ProduitDto();
+            CAT_PRODUIT produitData = new CAT_PRODUIT();
+            produitData = _produitRepository.GetProduitById(codeProduit);
+            produitDto = _produitHelper.ConvertToDTO(produitData);
+            return produitDto;
+
         }
 
         public ProduitDto UpdateProduit(ProduitDto produit)
         {
-            throw new NotImplementedException();
+            ProduitDto produitDto = new ProduitDto();
+            CAT_PRODUIT produitData = new CAT_PRODUIT();
+            produitData = _produitHelper.ConvertFromDto(produit);
+            produitDto = _produitHelper.ConvertToDTO(_produitRepository.UpdateProduit(produitData));
+            return produitDto;
         }
     }
 }

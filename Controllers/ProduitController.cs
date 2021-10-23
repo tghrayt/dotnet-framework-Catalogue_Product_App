@@ -125,44 +125,63 @@ namespace Catalogue_Produit_App.Controllers
             }
         }
 
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult SupprimerProduit(int id)
         {
             try
             {
-                CAT_PRODUIT produit = db.CAT_PRODUIT.Find(id); //recherchede la categorie
-                if (produit != null)
+                ProduitDto produitDto = _produitService.GetProduitById(id);
+                if (produitDto != null)
                 {
-                    db.CAT_PRODUIT.Remove(produit); //supprimer la categorie
-                    db.SaveChanges();//enregistrer le resultat
+                    LogHelper.Info("$Suppression de produit ..." + produitDto.libelleProduit + " est encours ...! ");
+                    _produitService.DeleteProduit(id);
+                    ViewBag.SuccessMessage = "Suppresion de produit ..." + produitDto.libelleProduit + " avec succès ...! ";
                 }
+                LogHelper.Info("$Suppression de produit ..." + produitDto.libelleProduit + "  avec succès ...! ");
                 return RedirectToAction("AjoutProduit");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ViewBag.ErrorMessage = "Impossible de supprimer ce produit ..!";
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }
 
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult ModifierProduit(int id)
         {
             try
             {
-                ViewBag.listeCategorie = db.CAT_CATEGORIE.ToList();
-                ViewBag.listeProduit = db.CAT_PRODUIT.ToList();
+                ViewBag.listeCategorie = _categorieService.GetAllCategories(); ;
+                ViewBag.listeProduit = _produitService.GetAllProduits();
 
-                CAT_PRODUIT produit = db.CAT_PRODUIT.Find(id);
+                CAT_PRODUIT produit = new CAT_PRODUIT();
+                ProduitDto produitDto = _produitService.GetProduitById(id);
+                produit = _produitHelper.ConvertFromDto(produitDto);
                 if (produit != null)
                 {
+                    LogHelper.Info("$Modification de produit ..." + produit.LIBELLE_PRODUIT + " est encours ...! ");
+                    ViewBag.SuccessMessage = "$Modification de produit ..." + produit.LIBELLE_PRODUIT + " avec succès ...! ";
                     return View("AjoutProduit", produit);
                 }
+                LogHelper.Info("$Modification de la categorie ..." + produit.LIBELLE_PRODUIT + " avec succès ...! ");
                 return RedirectToAction("AjoutProduit");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ViewBag.ErrorMessage = "Impossible de modifier ce produit ..!";
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }
 
+
+        [HandleError]
+        [HandleError(ExceptionType = typeof(Exception), View = "Error")]
         [HttpPost]
         public ActionResult ModifierProduit(CAT_PRODUIT produit)
         {
@@ -171,6 +190,7 @@ namespace Catalogue_Produit_App.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    LogHelper.Info("$Modification de produit ..." + produit.LIBELLE_PRODUIT + " est encours ...! ");
                     if (Request.Files.Count > 0)
                     {
                         var file = Request.Files[0]; //le nom de note fichier
@@ -184,14 +204,20 @@ namespace Catalogue_Produit_App.Controllers
                             produit.URL_IMAGE_PRODUIT = "/Fichier";
                         }
                     }
-                    db.Entry(produit).State = EntityState.Modified; // modification de notre categorie
-                    db.SaveChanges();
+                    ProduitDto produitDto = new ProduitDto();
+                    produitDto = _produitHelper.ConvertToDTO(produit);
+                    _produitService.UpdateProduit(produitDto);
+                    ViewBag.SuccessMessage = "$Modification de produit ..." + produit.LIBELLE_PRODUIT + " avec succès ...! ";
+
                 }
+                LogHelper.Info("$Modification de produit ..." + produit.LIBELLE_PRODUIT + " avec succès ...! ");
                 return RedirectToAction("AjoutProduit");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ViewBag.ErrorMessage = "Impossible de modifier ce produit ..!";
+                logger.Error(ex.ToString());
+                return View("Error");
             }
         }   
     }

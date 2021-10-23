@@ -1,6 +1,7 @@
 ﻿using Catalogue_Produit_App.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -25,7 +26,8 @@ namespace Catalogue_Produit_App.DAO
 
         public void DeleteProduit(int codeProduit)
         {
-            throw new NotImplementedException();
+            _db.CAT_PRODUIT.Remove(GetProduitById(codeProduit));
+            _db.SaveChanges();
         }
 
         public List<CAT_PRODUIT> GetAllProduits()
@@ -35,12 +37,14 @@ namespace Catalogue_Produit_App.DAO
 
         public CAT_PRODUIT GetProduitById(int codeProduit)
         {
-            throw new NotImplementedException();
+            return _db.CAT_PRODUIT.Find(codeProduit);
         }
 
         public CAT_PRODUIT UpdateProduit(CAT_PRODUIT produit)
         {
-            throw new NotImplementedException();
+            _db.Entry(produit).State = EntityState.Modified;
+            _db.SaveChanges();
+            return produit;
         }
     }
 }

@@ -108,14 +108,14 @@ namespace Catalogue_Produit_App.Controllers
         {
             try
             {
-                CAT_CATEGORIE categorie = db.CAT_CATEGORIE.Find(id); //recherchede la categorie
-                if (categorie != null)
+                CategorieDto categorieDto = _categorieService.GetGategorieById(id);//recherchede la categorie
+                if (categorieDto != null)
                 {
-                    LogHelper.Info("$Suppression de la categorie ..." + categorie.LIBELLE_CATEGORIE + " est encours ...! ");
+                    LogHelper.Info("$Suppression de la categorie ..." + categorieDto.libelleCategorie + " est encours ...! ");
                     _categorieService.DeleteCategorie(id);
-                    ViewBag.SuccessMessage = "Suppresion de la categorie ..." + categorie.LIBELLE_CATEGORIE + " avec succès ...! ";
+                    ViewBag.SuccessMessage = "Suppresion de la categorie ..." + categorieDto.libelleCategorie + " avec succès ...! ";
                 }
-                LogHelper.Info("$Suppresion de la categorie ..."+categorie.LIBELLE_CATEGORIE+" avec succès ...! ");
+                LogHelper.Info("$Suppresion de la categorie ..."+ categorieDto.libelleCategorie+" avec succès ...! ");
                 return RedirectToAction("AjoutCatalogue");
             }
             catch (Exception ex)

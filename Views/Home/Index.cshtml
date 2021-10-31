@@ -51,6 +51,8 @@
                     <div class="modal-body">
                         <div>
                             <div class="panel-body">
+                                <img src="@produit.URL_IMAGE_PRODUIT/@produit.IMAGE_PRODUIT" class="img-responsive image-popup-style" alt="Image">
+                                <div class="divider py-1 bg-dark"><hr></div>
                                 <p>Description:  @produit.DESCRIPTION_PRODUIT</p>
                                 <p>Statut: Neuf</p>
                                 <button style="float:right;" type="button" class="btn btn-default btn-sm">
@@ -60,7 +62,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button style="float:right;" type="button" class="btn btn-warning btn-sm">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Acheter
+                        </button>
                     </div>
                 </div>
 
